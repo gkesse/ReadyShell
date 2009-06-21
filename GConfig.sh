@@ -1,6 +1,7 @@
 #!/bin/bash
 #================================================
 source ./GConsole.sh
+source ./GString.sh
 #================================================
 declare -A GConfigDataMap
 #================================================
@@ -19,7 +20,9 @@ function GConfig_GetData() {
 function GConfig_ShowData() {
     for lKey in "${!GConfigDataMap[@]}" ; do
         local lValue=${GConfigDataMap[$lKey]}
-        GConsole_Echo "$lKey = $lValue"
+        lKey=$(GString_ColorFg "$lKey" "$GColorYellow")
+        lValue=$(GString_ColorFg "$lValue" "$GColorCyan")
+        echo "$lKey = $lValue"
     done
 }
 #================================================

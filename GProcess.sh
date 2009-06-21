@@ -7,13 +7,12 @@ source ./GProcessGit.sh
 source ./GProcessFile.sh
 source ./GProcessIFS.sh
 source ./GProcessSed.sh
+source ./GProcessTest.sh
 source ./GConfig.sh
 source ./GString.sh
 #================================================
 function GProcess_Run() {
     local lKey=$(GConfig_GetData "PROCESS")
-    echo "$lKey"
-    echo $(GString_Length "$lKey")
     if [ "$lKey" = "CONSOLE" ] ; then GProcessConsole_Run
     elif [ "$lKey" = "CONFIG" ] ; then GProcessConfig_Run
     elif [ "$lKey" = "AWK" ] ; then GProcessAwk_Run
@@ -21,6 +20,7 @@ function GProcess_Run() {
     elif [ "$lKey" = "FILE" ] ; then GProcessFile_Run
     elif [ "$lKey" = "IFS" ] ; then GProcessIFS_Run
     elif [ "$lKey" = "SED" ] ; then GProcessSed_Run
+    elif [ "$lKey" = "TEST" ] ; then GProcessTest_Run
     else GProcessConsole_Run ; fi
 }
 #================================================
