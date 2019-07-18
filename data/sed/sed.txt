@@ -1,10 +1,6 @@
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Bonus: Voici des -DONNEES- -DONNEES- -DONNEES- à traiter
-Voici des -DONNEES- -DONNEES- -DONNEES- à traiter :Bonus 
+
+Un,
+deux.
+Trois,
+quatre.
+
