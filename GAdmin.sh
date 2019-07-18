@@ -4,6 +4,9 @@ source ./GProcess.sh
 source ./GConfig.sh
 source ./GSetting.sh
 #================================================
-GConfig_SetData "PROCESS" "CONFIG"
+echo
+GConfig_SetData "PROCESS" "AWK"
+#GSetting_Load "data/config/config.txt"
 GProcess_Run
+echo
 #================================================

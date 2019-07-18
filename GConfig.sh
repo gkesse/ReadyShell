@@ -19,7 +19,7 @@ function GConfig_GetData() {
 function GConfig_ShowData() {
     for lKey in "${!GConfigDataMap[@]}" ; do
         local lValue=${GConfigDataMap[$lKey]}
-        GConsole_Print "$lKey = $lValue"
+        GConsole_Echo "$lKey = $lValue"
     done
 }
 #================================================

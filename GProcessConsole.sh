@@ -2,8 +2,8 @@
 #================================================
 source ./GConsole.sh
 #================================================
-function GFile_Exist() {
-    local lFile=$1
-    if [ ! -f $lFile ] ; then GConsole_Echo "[ GFile ] Error GFile_Exist: $lFile" ; echo ; exit ; fi
+function GProcessConsole_Run() {
+    GConsole_Echo "Bonjour tout le monde"
+    ${GConsole_Printf} "Bonjour %s tout le monde\n" "Monsieur"
 }
 #================================================
