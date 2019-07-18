@@ -1,12 +1,10 @@
 #!/usr/bin/bash
 #================================================
-source ./GProcess.sh
-source ./GConfig.sh
-source ./GSetting.sh
+source ./GIFS.sh
 #================================================
-echo
-GConfig_SetData "PROCESS" "SED"
-#GSetting_Load "data/config/config.txt"
-GProcess_Run
-echo
+function GProcessIFS_Run() {
+    GIFS_SplitData \
+    "Gerard KESSE;Developpeur C;SOGETEK" \
+    ";"
+}
 #================================================

@@ -1,12 +1,8 @@
 #!/usr/bin/bash
 #================================================
-source ./GProcess.sh
-source ./GConfig.sh
-source ./GSetting.sh
+source ./GFile.sh
 #================================================
-echo
-GConfig_SetData "PROCESS" "SED"
-#GSetting_Load "data/config/config.txt"
-GProcess_Run
-echo
+function GProcessFile_Run() {
+    GFile_Read
+}
 #================================================

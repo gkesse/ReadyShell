@@ -5,7 +5,7 @@ source ./GFile.sh
 function GGit_SetGlobalConfig() {
     local lKey=$1
     local lValue=$2
-    git config --global "$lKey" "$lValue"
+    git config --global $lKey $lValue
 }
 #================================================
 function GGit_ShowConfig() {
