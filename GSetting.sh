@@ -15,7 +15,7 @@ function GSetting_Load() {
         local lValueTmp=$(echo $lTrim | awk -F"=" '{print $2}')
         local lKey=$(echo $lKeyTmp | awk '{$1=$1;print}')
         local lValue=$(echo $lValueTmp | awk '{$1=$1;print}')
-        GConfig_SetData $lKey $lValue
+        GConfig_SetData "$lKey" "$lValue"
     done < "$lFile"
     local lConfigShow=$(GConfig_GetData "CONFIG_SHOW")
     if [ "$lConfigShow" = "TRUE" ] ; then GConfig_ShowData ; echo ; fi
