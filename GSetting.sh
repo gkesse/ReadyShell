@@ -13,8 +13,8 @@ function GSetting_Load() {
         if [ "$lFirstChar" = "#" ] ; then continue ; fi
         local lKeyTmp=$(echo $lTrim | awk -F"=" '{print $1}')
         local lValueTmp=$(echo $lTrim | awk -F"=" '{print $2}')
-        local lKey=$(echo $lKeyTmp | awk '{$1=$1;print}')
-        local lValue=$(echo $lValueTmp | awk '{$1=$1;print}')
+        local lKey=$(echo $lKeyTmp | awk '{print $1}')
+        local lValue=$(echo $lValueTmp | awk '{print $1}')
         GConfig_SetData "$lKey" "$lValue"
     done < "$lFile"
     local lConfigShow=$(GConfig_GetData "CONFIG_SHOW")

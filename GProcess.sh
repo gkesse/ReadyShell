@@ -12,8 +12,6 @@ source ./GString.sh
 #================================================
 function GProcess_Run() {
     local lKey=$(GConfig_GetData "PROCESS")
-    echo "$lKey"
-    echo $(GString_Length "$lKey")
     if [ "$lKey" = "CONSOLE" ] ; then GProcessConsole_Run
     elif [ "$lKey" = "CONFIG" ] ; then GProcessConfig_Run
     elif [ "$lKey" = "AWK" ] ; then GProcessAwk_Run
