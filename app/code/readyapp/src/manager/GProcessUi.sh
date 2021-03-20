@@ -1,4 +1,6 @@
 #================================================
+. manager/GSQLiteUi.sh
+#================================================
 G_STATE=""
 #================================================
 function GProcessUi_Run() {
@@ -47,8 +49,7 @@ function GProcessUi_CHOICE() {
 }
 #================================================
 function GProcessUi_SQLITE() {
-    printf "\n"
-    printf "GProcessUi_SQLITE\n"
+    GSQLiteUi_Run $@
     G_STATE="S_SAVE"
 }
 #================================================
