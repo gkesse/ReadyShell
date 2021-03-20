@@ -1,7 +1,3 @@
-# ReadyShell
-
-Bibliothèque de scripts shell pour l'administration système sous UNIX
-
 # Auteur
 
 Je suis 
@@ -12,3 +8,7 @@ Avec à la fois des compétences en Système Embarqué et en Robotique.
 * Site Web : [ReadyDev](https://readydev.freeddns.org/Accueil/ "Accédez à mon site web (ReadyDev)")
 * Email : [tiakagerard@hotmail.com](mailto:tiakagerard@hotmail.com?subject=Contact&body=Bonjour "Me contactez par email")
 * Localité : **Strasbourg - France**
+
+# ReadyShell
+
+Bibliothèque de scripts shell modulaire et réutilisable pour l'administration système sous UNIX
