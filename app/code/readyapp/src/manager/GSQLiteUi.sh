@@ -1,4 +1,6 @@
 #================================================
+. manager/GSQLite.sh
+#================================================
 G_STATE=""
 #================================================
 function GSQLiteUi_Run() {
@@ -9,8 +11,9 @@ function GSQLiteUi_Run() {
         elif [ "$G_STATE" = "S_METHOD" ] ; then GSQLiteUi_METHOD $@
         elif [ "$G_STATE" = "S_CHOICE" ] ; then GSQLiteUi_CHOICE $@
         #
+        elif [ "$G_STATE" = "S_SHOW_VERSION" ] ; then GSQLiteUi_SHOW_VERSION $@
         elif [ "$G_STATE" = "S_SHOW_TABLES" ] ; then GSQLiteUi_SHOW_TABLES $@
-        elif [ "$G_STATE" = "S_CREATE_TABLE" ] ; then GSQLiteUi_CREATE_TABLE $@
+        elif [ "$G_STATE" = "S_CONFIG_DATA_SHOW_DATA" ] ; then GSQLiteUi_CONFIG_DATA_SHOW_DATA $@
         #
         elif [ "$G_STATE" = "S_SAVE" ] ; then GSQLiteUi_SAVE $@
         elif [ "$G_STATE" = "S_LOAD" ] ; then GSQLiteUi_LOAD $@
@@ -35,41 +38,87 @@ function GSQLiteUi_INIT() {
 #================================================
 function GSQLiteUi_METHOD() {
     printf "SQLITE :\n"
-    printf "\t%-2s : %s\n" "1" "S_SHOW_TABLES"
-    printf "\t%-2s : %s\n" "2" "S_CREATE_TABLE"
+    printf "\t%-2s : %s\n" "1" "S_SHOW_VERSION"
+    printf "\t%-2s : %s\n" "2" "S_SHOW_TABLES"
+    printf "\t%-2s : %s\n" "3" "S_CONFIG_DATA_SHOW_DATA"
     printf "\n"
     G_STATE="S_CHOICE"
 }
 #================================================
 function GSQLiteUi_CHOICE() {
     local lAnswer=""
-    read -p "SQLITE ($G_SALITE_ID) ? " lAnswer
-    if [ "$lAnswer" = "" ] ; then lAnswer="$G_SALITE_ID" ; fi
+    read -p "SQLITE ($G_SQLITE_ID) ? " lAnswer
+    if [ "$lAnswer" = "" ] ; then lAnswer="$G_SQLITE_ID" ; fi
     if [ "$lAnswer" = "-q" ] ; then G_STATE="S_END"
     #
-    elif [ "$lAnswer" = "1" ] ; then G_STATE="S_SHOW_TABLES" ; G_SALITE_ID="$lAnswer"
-    elif [ "$lAnswer" = "2" ] ; then G_STATE="S_CREATE_TABLE" ; G_SALITE_ID="$lAnswer"
+    elif [ "$lAnswer" = "1" ] ; then G_STATE="S_SHOW_VERSION" ; G_SQLITE_ID="$lAnswer"
+    elif [ "$lAnswer" = "2" ] ; then G_STATE="S_SHOW_TABLES" ; G_SQLITE_ID="$lAnswer"
+    elif [ "$lAnswer" = "3" ] ; then G_STATE="S_CONFIG_DATA_SHOW_DATA" ; G_SQLITE_ID="$lAnswer"
     #
     fi
 }
 #================================================
-function GSQLiteUi_SHOW_TABLES() {
+function GSQLiteUi_SHOW_VERSION() {
     printf "\n"
-    printf "GSQLiteUi_SHOW_TABLES\n"
+    GSQLite_Version
     G_STATE="S_SAVE"
 }
 #================================================
-function GSQLiteUi_CREATE_TABLE() {
+function GSQLiteUi_SHOW_TABLES() {
     printf "\n"
-    printf "GSQLiteUi_CREATE_TABLE\n"
+    GSQLite_Query "
+    select name from sqlite_master
+    where type = 'table'
+    "
+    G_STATE="S_SAVE"
+}
+#================================================
+function GSQLiteUi_CONFIG_DATA_SHOW_DATA() {
+    printf "\n"
+    GSQLite_Query "
+    select * from config_data
+    " | awk -F "|" '
+    {
+        # sep
+        printf("+-")
+        for(i = 1; i <= NF; i++) {
+            if(i != 1) {printf("-+-")}
+            for(j = 1; j <= 20; j++) {
+                printf("-")    
+            }
+        }
+        printf("-+")
+        printf("\n")
+        # data
+        printf("| ")
+        for(i = 1; i <= NF; i++) {
+            if(i != 1) {printf(" | ")}
+            printf("%-20s", $i)    
+        }
+        printf(" |")
+        printf("\n")
+    }END{
+        # sep
+        printf("+-")
+        for(i = 1; i <= NF; i++) {
+            if(i != 1) {printf("-+-")}
+            for(j = 1; j <= 20; j++) {
+                printf("-")    
+            }
+        }
+        printf("-+")
+        printf("\n")
+    }'
     G_STATE="S_SAVE"
 }
 #================================================
 function GSQLiteUi_SAVE() {
+    GConfig_SaveData "G_SQLITE_ID" "$G_SQLITE_ID"
     G_STATE="S_QUIT"
 }
 #================================================
 function GSQLiteUi_LOAD() {
+    G_SQLITE_ID=$(GConfig_LoadData "G_SQLITE_ID")
     G_STATE="S_METHOD"
 }
 #================================================

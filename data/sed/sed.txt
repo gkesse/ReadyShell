@@ -1,6 +1,0 @@
-
-Un,
-deux.
-Trois,
-quatre.
-

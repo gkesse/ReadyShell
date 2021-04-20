@@ -1,5 +1,6 @@
 #================================================
 . manager/GProcessUi.sh
+. manager/GSQLite.sh
 #================================================
 function GProcess_Run() {
     local lKey=$1
@@ -15,6 +16,7 @@ function GProcess_Test() {
 }
 #================================================
 function GProcess_Ui() {
+    GSQLite_Init
     GProcessUi_Run $@
 }
 #================================================

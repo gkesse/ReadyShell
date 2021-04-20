@@ -1,5 +1,6 @@
 #================================================
 . manager/GSQLiteUi.sh
+. manager/GConfig.sh
 #================================================
 G_STATE=""
 #================================================
@@ -60,10 +61,12 @@ function GProcessUi_STRING() {
 }
 #================================================
 function GProcessUi_SAVE() {
+    GConfig_SaveData "G_ADMIN_ID" "$G_ADMIN_ID"
     G_STATE="S_END"
 }
 #================================================
 function GProcessUi_LOAD() {
+    G_ADMIN_ID=$(GConfig_LoadData "G_ADMIN_ID")
     G_STATE="S_METHOD"
 }
 #================================================
