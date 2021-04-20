@@ -38,9 +38,9 @@ function GSQLiteUi_INIT() {
 #================================================
 function GSQLiteUi_METHOD() {
     printf "SQLITE :\n"
-    printf "\t%-2s : %s\n" "1" "S_SHOW_VERSION"
-    printf "\t%-2s : %s\n" "2" "S_SHOW_TABLES"
-    printf "\t%-2s : %s\n" "3" "S_CONFIG_DATA_SHOW_DATA"
+    printf "\t%-2s : %s\n" "1" "afficher la version"
+    printf "\t%-2s : %s\n" "2" "afficher les tables"
+    printf "\t%-2s : %s\n" "3" "afficher la table config_data"
     printf "\n"
     G_STATE="S_CHOICE"
 }
@@ -66,7 +66,7 @@ function GSQLiteUi_SHOW_VERSION() {
 #================================================
 function GSQLiteUi_SHOW_TABLES() {
     printf "\n"
-    GSQLite_Query "
+    GSQLite_Show "
     select name from sqlite_master
     where type = 'table'
     "
@@ -75,40 +75,9 @@ function GSQLiteUi_SHOW_TABLES() {
 #================================================
 function GSQLiteUi_CONFIG_DATA_SHOW_DATA() {
     printf "\n"
-    GSQLite_Query "
+    GSQLite_Show "
     select * from config_data
-    " | awk -F "|" '
-    {
-        # sep
-        printf("+-")
-        for(i = 1; i <= NF; i++) {
-            if(i != 1) {printf("-+-")}
-            for(j = 1; j <= 20; j++) {
-                printf("-")    
-            }
-        }
-        printf("-+")
-        printf("\n")
-        # data
-        printf("| ")
-        for(i = 1; i <= NF; i++) {
-            if(i != 1) {printf(" | ")}
-            printf("%-20s", $i)    
-        }
-        printf(" |")
-        printf("\n")
-    }END{
-        # sep
-        printf("+-")
-        for(i = 1; i <= NF; i++) {
-            if(i != 1) {printf("-+-")}
-            for(j = 1; j <= 20; j++) {
-                printf("-")    
-            }
-        }
-        printf("-+")
-        printf("\n")
-    }'
+    "
     G_STATE="S_SAVE"
 }
 #================================================
